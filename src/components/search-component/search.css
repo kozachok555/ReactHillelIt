@@ -20,7 +20,7 @@
     width: 350px;
     border: none;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.833);
     background-color: rgba(250, 235, 215, 0.443);
     display: flex;
 }
