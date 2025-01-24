@@ -91,7 +91,7 @@ class SmileComponent extends Component{
     voteCount = (smile) =>{
         this.setState((prev) => {
             const updatedCounts = {...prev.smileCounts,[smile]: prev.smileCounts[smile] + 1,};
-                return { smileCounts: updatedCounts,/*/ allowClick: false /*/ };
+                return { smileCounts: updatedCounts,allowClick: false };
             },
             () => {
                 this.saveToLocalStorage(this.state.smileCounts);
