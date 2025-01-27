@@ -1,0 +1,100 @@
+.TodoList{
+    max-width: 800px;
+    height: auto;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background: #ffffff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+input {
+    flex: 1;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+input:focus {
+    border-color: #007bff;
+}
+.button-add{
+    padding: 0 20px;
+    height: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button-add:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+.button-add:active {
+    background-color: #1e40af;
+    transform: scale(0.95);
+}
+.button-delete {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #ef4444;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.button-delete:hover {
+    background-color: #dc2626;
+    transform: scale(1.05);
+}
+
+.button-delete:active {
+    background-color: #b91c1c;
+    transform: scale(0.95);
+}
+.todo-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo-item {
+    background: #f4f4f4;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    color: #333333;
+}
+.todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.empty {
+    font-size: 16px;
+    color: #999999;
+    text-align: center;
+}
