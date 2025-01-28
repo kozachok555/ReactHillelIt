@@ -1,7 +1,6 @@
 import {Navigate, Routes, Route} from 'react-router'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
-import Footer from './Components/Footer/Footer'
 import Contacts from './Components/Contacts/Contacts'
 import AboutMe from './Components/AboutMe/AboutMe'
 import './App.css'
@@ -15,7 +14,6 @@ function App() {
               <Route path='/contacts' element={<Contacts />}/>
               <Route path='/about-me' element={<AboutMe />}/>
             </Routes>
-          <Footer />
       </div>
     )
 }
