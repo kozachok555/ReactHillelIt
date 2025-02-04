@@ -1,10 +1,14 @@
 import './App.css';
-
+import {Provider} from 'react-redux'
+import { store } from './store';
+import CounterComponent from './Components/Counter/CounterComponent/CounterComponent';
 function App() {
   return (
-    <div className="App">
-        
-    </div>
+    <Provider store={store}>
+      <div className="App">
+          <CounterComponent/>
+      </div>
+    </Provider>
   );
 }
 
