@@ -24,6 +24,7 @@ export default function TodoList(){
             {todoList.map((x)=>{
                 return <p>{x.name}</p>
             })}
+            <p className="task-counter">Количество задач: {todoList.length}</p>
         </div>
     )
 }
