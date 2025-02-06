@@ -1,5 +1,5 @@
 import {configureStore } from '@reduxjs/toolkit'
-import thunk from "redux-thunk"   
+import {thunk} from "redux-thunk"   
 import todoSlice from './components/Task/slice';
 
 export const store = configureStore({
