@@ -1,0 +1,10 @@
+.swapi-box{
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    width: 350px;
+    display: flex;
+    border: 1px solid black;
+    margin: 0 auto;
+    text-align: left;
+}
