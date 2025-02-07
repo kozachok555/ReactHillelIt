@@ -5,6 +5,7 @@ import './Swapi.css'
 // const FETCH_URL = "http://localhost:4000/todos";
 
 const fetchApi = (api) => async (dispatch)=>{
+    if (!api) return;
     try{
         const response = await fetch(api)
         const data = await response.json();
@@ -18,21 +19,24 @@ export default function Swapi() {
     const swapiContent = useSelector((state) => state.swapiContent.swapiContent);
     const [newText, setText] = useState("")
     useEffect(()=>{
-        dispatch(fetchApi(newText))
+        const delay = setTimeout(()=>{
+            if(newText) dispatch(fetchApi(newText));
+        },500)
+        return() => clearTimeout(delay)
     }, [newText,dispatch])
     return (
         <div>
             <h2>SWAPI</h2>
                 <input type="text" onChange={(e)=>{
-                    try{
                         setText(e.target.value)
-                    }catch(e){
-                        console.log(e)
-                    }
                 }}/>
                 <pre className="swapi-box">
                     {JSON.stringify(swapiContent, null,3)}
                 </pre>
+                <button onClick={()=>{
+                    setText("")
+                    dispatch(addToList([]))
+                }}>Clear</button>
         </div>
     )
 }
