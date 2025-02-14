@@ -25,7 +25,7 @@ export default function Swapi() {
                 <input type="text" value={newText} onChange={(e)=>{
                         setText(e.target.value)
                 }}/>
-                <button onClick={async ()=>{
+                <button onClick={()=>{
                     dispatch(fetchApi(newText))
                     setText("")
                 }}>Search</button>
