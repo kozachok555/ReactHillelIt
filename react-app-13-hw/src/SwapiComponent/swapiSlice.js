@@ -8,10 +8,13 @@ const swapiSlice = createSlice({
     name: 'swapi',
     initialState,
     reducers: {
-        addToList: (state,action)=>{
+        addToSwapi: (state,action)=>{
             return {...state, swapiContent: action.payload}
+        },
+        clearSwapiContent: ()=>{
+            return {swapiContent: []};
         }
     }
 })
-export const {addToList} = swapiSlice.actions;
+export const {addToSwapi, clearSwapiContent} = swapiSlice.actions;
 export default swapiSlice.reducer;
