@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { addTodos } from "./todoListSlice";
+import { ADD_TODO, CLEAR_TODOS, DELETE_TODO } from "./todoListSlice";
+import './TodoList.scss'
 export default function TodoList() {
   const todoList = useSelector((todo) => todo.todo.todoList);
   const dispatch = useDispatch();
@@ -16,15 +17,24 @@ export default function TodoList() {
       <button
         onClick={() => {
           if (text.trim()) {
-            dispatch(addTodos({ id: Date.now(), text, completed: false }));
+            dispatch({
+              type: ADD_TODO,
+              payload: { id: Date.now(), text, completed: false },
+            });
             setText("");
           }
         }}
       >
         Add
       </button>
+      <button onClick={() => dispatch({ type: CLEAR_TODOS })}>Clear</button>
       {todoList.length > 0 ? (
-        todoList.map((e) => <p key={e.id}>{e.text}</p>)
+        todoList.map((e) => <p key={e.id}>
+          <div className="todo-card">
+            <h5>{e.text}</h5>
+            <button className="btn-delete" onClick={() => dispatch({ type: DELETE_TODO, payload: e.id })}>Delete</button>
+          </div>
+        </p>)
       ) : (
         <p>Список пуст</p>
       )}
