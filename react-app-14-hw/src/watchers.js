@@ -1,11 +1,11 @@
 import { takeEvery } from "redux-saga/effects";
-import { callAddTodosWorker, callDeleteTodosWorker,callToDoneTodosWorker,callToEditTodosWorker,callToClearTodosWorker} from './workers'
-import { ADD_TODO,DELETE_TODO,DONE_TODO,CLEAR_TODOS,EDIT_TODO} from './todoListSlice'
+import { callAddTodosWorker, callDeleteTodosWorker,callToDoneTodosWorker,callToEditTodosWorker,fetchTodosWorker} from './workers'
+import { fetchAddTodos, fetchDeleteTodos, fetchDoneTodos, fetchEditTodos,fetchTodos} from './todoListSlice'
 
 export function* todosWatcher(){
-    yield takeEvery(ADD_TODO, callAddTodosWorker)
-    yield takeEvery(DELETE_TODO, callDeleteTodosWorker)
-    yield takeEvery(DONE_TODO, callToDoneTodosWorker)
-    yield takeEvery(CLEAR_TODOS, callToClearTodosWorker)
-    yield takeEvery(EDIT_TODO, callToEditTodosWorker);
+    yield takeEvery(fetchAddTodos.type, callAddTodosWorker)
+    yield takeEvery(fetchDeleteTodos.type, callDeleteTodosWorker)
+    yield takeEvery(fetchDoneTodos.type, callToDoneTodosWorker)
+    yield takeEvery(fetchEditTodos.type, callToEditTodosWorker);
+    yield takeEvery(fetchTodos.type, fetchTodosWorker);
 }

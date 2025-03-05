@@ -1,40 +1,77 @@
-import {createSlice} from '@reduxjs/toolkit'
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    todoList: [],
-}
+  todoList: [],
+};
 
 const todoList = createSlice({
-    name: 'todo',
-    initialState,
-    reducers: {
-        addTodos: (state, action) => {
-            if (action.payload) {
-                state.todoList.push(action.payload);
-            }
-        },
-        deleteTodos: (state, action) => {
-            state.todoList = state.todoList.filter(todo => todo.id !== action.payload);
-        },
-        editTodos: (state,action)=>{
-            const todo = state.todoList.find(e => e.id === action.payload.id);
-            if(todo) todo.text = action.payload.text;
-        },
-        doneTodos: (state,action)=>{
-            const todo = state.todoList.find(e => e.id === action.payload);
-            if(todo) todo.completed = !todo.completed;
-        },
-        clearTodos: ()=>{
-            return {todoList: []};
+  name: "todo",
+  initialState,
+  reducers: {
+    addTodos: (state, action) => {
+      return {
+        ...state,
+        todoList: [...state.todoList, action.payload],
+      };
+    },
+    deleteTodos: (state, action) => {
+      return {
+        ...state,
+        todoList: state.todoList.filter((todo) => todo._id !== action.payload),
+      };
+    },
+    editTodos: (state, action) => {
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo._id === action.payload._id
+            ? { ...todo, name: action.payload.name }
+            : todo
+        ),
+      };
+    },
+    doneTodos: (state, action) => {
+        const todo = state.todoList.find((todo) => todo._id === action.payload);
+        if (todo) {
+          todo.checked = !todo.checked;
         }
-    }
-})
-export const ADD_TODO = "todos/ADD_TODO";
-export const DELETE_TODO = "todos/DELETE_TODO";
-export const DONE_TODO = "todos/DONE_TODO";
-export const EDIT_TODO = "todos/EDIT_TODO";
-export const CLEAR_TODOS = "todos/CLEAR_TODOS";
+    },
+    fetchTodos: (state) => state,
+    setTodos: (state, action) => {
+      return {
+        ...state,
+        todoList: action.payload,
+      };
+    },
+    clearTodos: () => {
+      return { todoList: [] };
+    },
+    fetchAddTodos: (state) => {
+      return state;
+    },
+    fetchDeleteTodos: (state) => {
+      return state;
+    },
+    fetchEditTodos: (state) => {
+      return state;
+    },
+    fetchDoneTodos: (state) => {
+      return state;
+    },
+  },
+});
 
-export const {addTodos, deleteTodos,editTodos,doneTodos,clearTodos} = todoList.actions;
+export const {
+  addTodos,
+  deleteTodos,
+  editTodos,
+  doneTodos,
+  clearTodos,
+  fetchAddTodos,
+  fetchTodos,
+  setTodos,
+  fetchDeleteTodos,
+  fetchDoneTodos,
+  fetchEditTodos,
+} = todoList.actions;
 export default todoList.reducer;
