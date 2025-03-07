@@ -34,16 +34,21 @@ function* callDeleteTodosWorker(action) {
   yield put(deleteTodos(action.payload));
 }
 function* callToDoneTodosWorker(action) {
-    const todoId = action.payload;
-    const todo = yield call(fetch, `${API_URL}/${todoId}`); 
-    const updatedTodo = yield todo.json();
-    updatedTodo.checked = !updatedTodo.checked;
-    yield call(apiCall, `${API_URL}/${todoId}`, "PUT", updatedTodo);
-    yield put(doneTodos(todoId));
+  const todoId = action.payload;
+  const todo = yield call(fetch, `${API_URL}/${todoId}`);
+  const updatedTodo = yield todo.json();
+  updatedTodo.checked = !updatedTodo.checked;
+  yield call(apiCall, `${API_URL}/${todoId}`, "PUT", updatedTodo);
+  yield put(doneTodos(todoId));
 }
 function* callToEditTodosWorker(action) {
-    const updatedTodo = yield call(apiCall, `${API_URL}/${action.payload._id}`, "PUT", action.payload);
-    yield put(editTodos(updatedTodo));
+  const updatedTodo = yield call(
+    apiCall,
+    `${API_URL}/${action.payload._id}`,
+    "PUT",
+    action.payload
+  );
+  yield put(editTodos(updatedTodo));
 }
 export {
   callAddTodosWorker,

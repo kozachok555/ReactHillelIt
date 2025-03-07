@@ -15,7 +15,7 @@ export default function TodoList() {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editTodo, setEditTodo] = useState(null);
+  const [getIdTodo, setIdTodo] = useState(null);
   useEffect(() => {
     dispatch(fetchTodos());
   }, [dispatch]);
@@ -57,11 +57,13 @@ export default function TodoList() {
               <input
                 type="checkbox"
                 checked={e.checked}
-                onChange={() => dispatch({ type: fetchDoneTodos.type, payload: e._id })}
+                onChange={() =>
+                  dispatch({ type: fetchDoneTodos.type, payload: e._id })
+                }
               />
               <button
-                onClick={(todo) => {
-                  setEditTodo(todo);
+                onClick={() => {
+                  setIdTodo(e._id);
                   setIsModalOpen(true);
                 }}
               >
@@ -88,14 +90,15 @@ export default function TodoList() {
           </div>
           <button
             onClick={() => {
-              if (editTodo && text.trim()) {
+              console.log(getIdTodo)
+              if (text.trim()) {
                 dispatch({
                   type: fetchEditTodos.type,
-                  payload: { _id: editTodo._id, name: text },
+                  payload: { _id: getIdTodo, name: text },
                 });
               }
               setIsModalOpen(false);
-              setEditTodo(null);
+              setIdTodo(null);
               setText("");
             }}
           >
