@@ -15,7 +15,7 @@ export default function TodoList() {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [getIdTodo, setIdTodo] = useState(null);
+  const [idTodo, setIdTodo] = useState(null);
   useEffect(() => {
     dispatch(fetchTodos());
   }, [dispatch]);
@@ -49,7 +49,7 @@ export default function TodoList() {
               <button
                 className="btn-delete"
                 onClick={() =>
-                  dispatch({ type: fetchDeleteTodos.type, payload: e._id })
+                  dispatch(fetchDeleteTodos(e._id))
                 }
               >
                 Delete
@@ -58,7 +58,7 @@ export default function TodoList() {
                 type="checkbox"
                 checked={e.checked}
                 onChange={() =>
-                  dispatch({ type: fetchDoneTodos.type, payload: e._id })
+                  dispatch(fetchDoneTodos(e._id))
                 }
               />
               <button
@@ -90,12 +90,8 @@ export default function TodoList() {
           </div>
           <button
             onClick={() => {
-              console.log(getIdTodo)
               if (text.trim()) {
-                dispatch({
-                  type: fetchEditTodos.type,
-                  payload: { _id: getIdTodo, name: text },
-                });
+                dispatch(fetchEditTodos({ _id: idTodo, name: text }));
               }
               setIsModalOpen(false);
               setIdTodo(null);

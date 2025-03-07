@@ -1,7 +1,5 @@
-import { addTodos } from "./todoListSlice";
-import { editTodos } from "./todoListSlice";
-import { doneTodos } from "./todoListSlice";
-import { deleteTodos, setTodos } from "./todoListSlice";
+import { setTodos } from "./todoListSlice";
+import { fetchTodos } from "./todoListSlice";
 import { put, call } from "redux-saga/effects";
 const API_URL = "http://localhost:4000/todos";
 
@@ -23,32 +21,35 @@ function* fetchTodosWorker() {
 }
 
 function* callAddTodosWorker(action) {
-  const newTodo = yield call(apiCall, API_URL, "POST", action.payload);
-  yield put(addTodos(newTodo));
+  yield call(apiCall, API_URL, "POST", action.payload);
+  yield put(fetchTodos());
 }
 function* callDeleteTodosWorker(action) {
   yield call(fetch, `${API_URL}/${action.payload}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
-  yield put(deleteTodos(action.payload));
+  yield put(fetchTodos());
 }
 function* callToDoneTodosWorker(action) {
   const todoId = action.payload;
   const todo = yield call(fetch, `${API_URL}/${todoId}`);
+
   const updatedTodo = yield todo.json();
+
   updatedTodo.checked = !updatedTodo.checked;
+
   yield call(apiCall, `${API_URL}/${todoId}`, "PUT", updatedTodo);
-  yield put(doneTodos(todoId));
+  yield put(fetchTodos());
 }
 function* callToEditTodosWorker(action) {
-  const updatedTodo = yield call(
+  yield call(
     apiCall,
     `${API_URL}/${action.payload._id}`,
     "PUT",
     action.payload
   );
-  yield put(editTodos(updatedTodo));
+  yield put(fetchTodos());
 }
 export {
   callAddTodosWorker,
